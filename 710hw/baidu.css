@@ -1,0 +1,148 @@
+body{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.header{
+    height: 60px;
+    font-size: 13px;
+}
+
+.header-left{
+    float: left;
+    padding-left: 24px;
+}
+
+.header-right{
+    float: right;
+    padding-right: 24px;
+}    
+
+.header-left>a{
+    text-decoration: none;
+    color: #222222;
+    margin-right: 31px;
+    margin-top: 19px;
+    display: inline-block;  
+}
+
+.header-right>a{
+    text-decoration: none;
+    margin-left: 32px;
+    margin-top: 19px;
+    display: inline-block;
+}
+
+.fighting{
+    color: #f63051;
+}
+
+.set{
+    color: #222222;
+}
+
+.header a:hover{
+    color:#315efb;
+}
+
+.header a:active{
+    color: #f60;
+}
+
+.register{
+    height: 24px;
+    width: 48px;
+    background-color: #4e71f2;
+    line-height: 24px;
+    font-family: inherit;
+    font-weight: 400;
+    color: #fff!important;
+    text-align: center;
+    border: 0;
+    border-radius: 6px;
+
+}
+
+.container{
+    height: 689px;
+    position: relative;
+}
+
+.center{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.text{
+    width: 546px;
+    height: 44px;
+    border: 2px solid #c4c7ce;;
+    border-radius: 10px 0 0 10px;
+    font-size: 16px;
+    float: left;
+    
+
+}
+
+.button{
+    width: 108px;
+    height: 48px;
+    background-color: #4e6ef2;
+    line-height: 48px;
+    border: 0;
+    border-radius: 0 10px 10px 0;
+    font-size: 17px;
+    color: #fff;
+       
+}
+
+.footer{
+    height: 40px;
+    background-color: #fafafa;
+    font-size: 12px;
+    line-height: 40px;
+}
+
+.footer-left{
+    float: left;
+    padding-left: 30px;
+}
+
+.footer-right{
+    float: right;
+    padding-right: 30px;
+}
+
+.footer-left a{
+    text-decoration: none;
+    margin-right: 20px;
+    color: #9195a3;
+    display: inline-block;
+}
+
+.footer-right a{
+    text-decoration: none;
+    margin-right: 20px;
+    color: #bbbbbb;
+    display: inline-block;
+}
+
+.footer a:hover{
+    color: #333333;
+}
+
+.footer a:active{
+    color: #f60;
+}
+
+.bottom{
+    margin-right: 20px;
+    color: #bbbbbb;
+}
