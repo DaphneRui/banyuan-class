@@ -154,11 +154,11 @@ body{
 }
 .body-center_inbox{
     height: 800px;
+    max-width: 730px;
     margin: 0 360px 0 350px; 
     padding: 0 16px;
-   
+    margin: 0 auto;
 }
-
 .body-left {
     float: left;
     width: 350px;
@@ -388,11 +388,7 @@ body{
 .logo-wifi{
     vertical-align: text-bottom;
     fill: currentColor;
-    color: #586069;
     overflow: hidden;
-}
-.logo-wifi:hover{
-    color: #0366d6;
 }
 .mid-link:hover{
     text-decoration: underline;
