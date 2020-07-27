@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>baidu</title>
+
+    <link rel="stylesheet" href="baidu.css">
+</head>
+<body>
+
+    <!-- header -->
+    <header class="header">
+         
+        <div class="header-left">
+            <a href="http://news.baidu.com/">新闻</a>
+			<a href="https://www.hao123.com/">hao123</a>
+			<a href="https://map.baidu.com/@13252088,2915197,13z">地图</a>
+			<a href="https://haokan.baidu.com/?sfrom=baidu-top">视频</a>
+			<a href="https://tieba.baidu.com/index.html">贴吧</a>
+			<a href="https://xueshu.baidu.com/">学术</a>
+			<a href="https://www.baidu.com/more/">更多</a>
+        </div>
+        
+        <div class="header-right">
+
+            <ul>
+                <li class="right-li"><a href="https://www.baidu.com/s?wd=%E9%AB%98%E8%80%83&sa=searchpromo_gk_pc_ysj" class="fighting" >高考加油</a></li>
+            
+                <li class="right-set" onmouseover="change('set','block')" onmouseout="change('set','none')">
+                    
+                    <a>设置</a>
+                    <div id="set">
+                        <a href="">搜索设置</a>
+                        <a href="">高级搜索</a>
+                        <a href="">关闭预测</a>
+                        <a href="">隐私设置</a>
+                        <a href="">关闭热榜</a>
+                            
+                    </div>
+                     
+                    
+                </li> 
+            
+                <li class="right-li">
+                    <a href="https://passport.baidu.com/v2/?login&tpl=mn&u=http%3A%2F%2Fwww.baidu.com%2F&sms=5"> 
+                        <button class="register">登录</button>
+                    </a>
+                </li> 
+            </ul>
+            
+
+        </div>
+
+    </header>
+
+    <!-- body -->
+    <div class="container">
+    
+        <div class="center">
+            
+            <img src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png" alt="百度" style="width: 270px; height: 129px;">
+            
+            <form action="" style="font-size: 0px;">
+                <input type="text" class="text">
+                <input type="button" value="百度一下" class="button">
+            </form>
+            
+
+        </div>
+    
+    </div>
+    
+    <!-- footer -->
+    <footer class="footer">
+
+        <div class="footer-left">
+            <a href="https://www.baidu.com/cache/sethelp/index.html">设为首页</a>
+            <a href="https://home.baidu.com/">关于百度</a>
+            <a href="http://ir.baidu.com/">About Baidu</a>
+            <a href="https://isite.baidu.com/site/e.baidu.com/d38e8023-2131-4904-adf7-a8d1108f51ef?refer=888">百度营销</a>
+            <a href="https://www.baidu.com/duty">使用百度前必读</a>
+            <a href="https://help.baidu.com/newadd?prod_id=1&category=4">意见反馈</a>
+            <a href="https://help.baidu.com/">帮助中心</a>
+        </div>
+
+        <div class="footer-right">
+            <span class="bottom">©2020 Baidu </span>
+            <span class="bottom">(京)-经营性-2017-0020</span>
+            <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002000001">
+                <span>京公网安备11000002000001号</span>
+            </a>
+            <span style="color: #bbbbbb;">京ICP证030173号</span>
+        </div>
+
+    </footer>
+</body>
+<script>
+    function change(myid,mode) {
+        document.getElementById(myid).style.display=mode;
+        if(mode=='block'){//显示下拉菜单
+            //设置下拉菜单所在的div边框
+            document.getElementById(myid).style.border="1px solid #eee";
+            document.getElementById(myid).style.borderRadius="12px";
+
+            //设置鼠标划过的li的边框以及背景颜色
+            // document.getElementById(myid).parentNode.style.backgroundColor="#fff";
+        }
+        else{
+            //当不显示下拉列表的时候 鼠标划过的li的边框以及背景颜色
+            document.getElementById(myid).parentNode.style.backgroundColor="";
+            document.getElementById(myid).parentNode.style.border="";
+        }
+    }
+    
+</script>
+</html>

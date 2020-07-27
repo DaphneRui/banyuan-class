@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form表单练习</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            width: 800px;
+            height: 600px;
+            background-color: rgb(202, 202, 206);
+            margin: 100px auto;
+        }
+        .header{
+            width: 100%;
+            height: 120px;
+            padding: 0 100px;
+            line-height: 120px;
+            box-sizing: border-box;
+            
+            
+        }
+        .contain{
+            border-top: 1px solid white;
+            
+        }
+        .center{
+            margin: 50px 200px 0px 50px;
+            text-align: right;
+        }
+        .contain-input{
+            width: 380px;
+            height: 40px;
+        }
+        .send{
+            margin-top: 50px;
+            margin-left: 215px;
+            margin-top: 50px;
+            margin-left: 215px;
+        }
+        .send-botton{
+            width: 100px;
+            height: 50px;
+            background-color: tomato;
+            border-radius: 10px;
+            font-size: 25px;
+            color: white;
+            border: thin;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>表单</h1>
+        </div>
+        <div class="contain">
+            <div class="center">
+                <h3>Your Name: <input type="text" name="usename" placeholder="Your Full Name" class="contain-input" onblur="checkUserName()"></h3>
+                <span class="nameInfo"></span>
+            </div>
+            <div class="center">
+                <h3>Your Password: <input type="password" name="pwd" class="contain-input" onblur="checkRepassword()"></h3>
+                <span class="passwordInfo"></span>
+            </div>
+            <div class="send">
+                <input type="button" value="Send" class="send-botton">
+            </div>
+            
+
+            
+
+            
+        </div>
+    </div>
+    
+</body>
+<script>
+    $(document).ready(function () {
+    function validateForm(){
+        if(checkUserName()&&checkPassword()){
+            console.log("恭喜您！注册成功！");
+        }
+    }
+    });
+
+    //验证用户名
+    function checkUserName(){
+        var name=document.getElementById("user-name").value.trim();
+        var nameRegex=/^[a-zA-Z0-9_-]{4,16}$/;
+        if(!nameRegex.test(name)){
+            document.getElementById("nameInfo").innerHTML="输入错误,用户名为4~16个字符，且只能为字母，数字，下划线，减号";
+        }else{
+            document.getElementById("nameInfo").innerHTML="";
+            return true;
+        }
+
+    }
+    //验证密码
+    function checkPassword(){
+        var password=document.getElementById("password").value.trim();
+        //var password=$("#password").value;
+        $("#passwordInfo").innerHTML="";
+        var passwordRegex=/^[a-zA-Z0-9_]{8,15}$/;
+        if(!passwordRegex.test(password)){
+            document.getElementById("passwordInfo").innerHTML="输入错误,密码为8~15个字符,且只能为字母，数字或下划线字符";
+        }else{
+            document.getElementById("passwordInfo").innerHTML="";
+        }
+    }
+
+</script>
+
+
+</html>
