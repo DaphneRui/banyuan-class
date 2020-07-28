@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>放大镜</title>
+    
+    <style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+
+    .container {
+        width: 850px;
+        margin: 50px auto;
+        text-align: center;
+    }
+    .magnifierContainer {
+        display: flex;
+        margin-top: 30px;
+    }
+    .imgMedium {
+        position: relative;
+    }
+    .imgLeft .magnifier {
+        position: absolute;
+        display: none;
+        width: 200px;
+        height: 200px;
+    }
+    .mediumContainer {
+        width: 350px;
+        height: 350px;
+        border: 1px solid #eee;
+        overflow: hidden;
+    }
+    #zhezhao {
+        width: 350px;
+        height: 350px;
+        background: transparent;
+        position: absolute;
+        top: 0;
+        border: 1px solid transparent;
+    }
+    #zhezhao:hover {
+        cursor: move;
+    }
+    .img_u {
+        width: 500px;
+        height: 450px;
+        border: 1px solid #eee;
+        float: left;
+        margin-left: 15px;
+        overflow: hidden;
+        display: none;
+    }
+    </style>
+
+</head>
+<body>
+    
+    <div class="container">
+        <div class="magnifierContainer">
+            <div class="imgLeft">
+                <!-- 中号图片 -->
+                <div class="imgMedium" id="imgMedium">
+                    <!-- 放大镜 -->
+                    <div class="magnifier" id="magnifier">
+                        <img src="./2.png">
+                    </div>
+                    <!-- 图片 -->
+                    <div class="mediumContainer" id="mediumContainer">
+                        <img src="./1.jpg">
+                    </div>    
+                    <div id="zhezhao"></div>            
+                </div>
+            </div>
+            <div class="imgRight">
+                <!-- 大图 -->
+                <div class="img_u" id="img_u">
+                    <img src="./1.jpg">
+                </div>
+            </div>        
+        </div>
+    </div>
+    
+</body>
+
+<script src="./jquery3.5.js"></script>
+
+<script>
+
+    $('#zhezhao').mousemove(function(e){
+        $('#img_u').show();
+        $('#magnifier').show();
+        var left = e.offsetX - parseInt($('#magnifier').width()) / 2;
+        var top = e.offsetY - parseInt($('#magnifier').height()) / 2;
+        left = left < 0 ? 0 : left;
+        left = left > (parseInt($('#zhezhao').outerWidth()) - parseInt($('#magnifier').outerWidth())) ? (parseInt($('#zhezhao').outerWidth()) - parseInt($('#magnifier').outerWidth())) : left;
+        top = top < 0 ? 0 : top;
+        top = top > (parseInt($('#zhezhao').outerHeight()) - parseInt($('#magnifier').outerHeight())) ? (parseInt($('#zhezhao').outerHeight()) - parseInt($('#magnifier').outerHeight())) : top;
+
+        $('#magnifier').css('left', left + 'px');
+        $('#magnifier').css('top', top + 'px');
+
+        var leftRate = left / parseInt($('#zhezhao').outerWidth());
+        var bigLeft = leftRate * parseInt($('#img_u img').outerWidth());
+        $('#img_u img').css('margin-left', -bigLeft + 'px');
+
+        var topRate = top / parseInt($('#zhezhao').outerHeight());
+        var bigTop =  topRate * parseInt($('#img_u img').outerHeight());
+        $('#img_u img').css('margin-top', -bigTop + 'px');
+    })
+    $('#zhezhao').mouseleave(function(){
+        $('#img_u').hide();
+        $('#magnifier').hide();
+    })
+
+</script>
+
+</html>
