@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+
+    <style>
+
+        *{
+            padding: 0;
+            margin:0;
+        }
+
+        li{
+            list-style: none;
+        }
+
+
+        .container{
+            position: relative;
+        }
+
+        .banner{
+            position: absolute;
+        }
+
+
+        .banner_li{
+            float:left;
+        }
+
+        .banner_img{
+            width: 100vw;
+            height:100vh;
+            display: block; 
+        }
+
+
+        /* 小圆点 */
+        .button_container{
+            position: absolute;
+        }
+
+        .button_container_circle{
+            border-radius: 50%;
+            height: 10px;
+            width: 10px;
+            cursor: pointer;
+            background-color:white;
+            margin-right: 5px;
+            float:left;
+        }
+
+        .on{
+            background-color: aqua;
+        }
+
+
+        /* 左右按钮 */
+        /*左右按钮*/
+        .arrow{
+            position: absolute;  /*设置定位*/
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            z-index: 200;
+            background: RGBA(0,0,0,.3);  /*背景透明度*/
+            color: #fff;
+            text-decoration: none;  /* 去掉下划线 */
+        }
+
+        /* 向左 */
+        .prev{
+            left:20px;
+        }
+
+        /* 向右 */
+        .next{
+            right:20px;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <div class="container">
+        <!-- 轮播图主体 -->
+        <ul class="banner">
+  
+          <li class="banner_li">
+              <a href="javascript:;">
+                <img src="./img/cat5.jpeg"  class="banner_img" />
+              </a>
+          </li>
+  
+          <li class="banner_li">
+            <a href="javascript:;">
+              <img src="./img/cat1.jpeg"  class="banner_img" />
+            </a>
+          </li>
+  
+          <li class="banner_li">
+            <a href="javascript:;">
+              <img src="./img/cat2.jpeg"  class="banner_img" />
+            </a>
+          </li>
+  
+          <li class="banner_li">
+            <a href="javascript:;">
+              <img src="./img/cat3.jpeg"  class="banner_img" />
+            </a>
+          </li>
+  
+          <li class="banner_li">
+            <a href="javascript:;">
+              <img src="./img/cat4.jpeg"  class="banner_img" />
+            </a>
+          </li>
+  
+          <li class="banner_li">
+            <a href="javascript:;">
+              <img src="./img/cat5.jpeg"  class="banner_img" />
+            </a>
+          </li>
+  
+          <li class="banner_li">
+              <a href="javascript:;">
+                <img src="./img/cat1.jpeg"  class="banner_img" />
+              </a>
+          </li>
+        </ul>
+        
+
+        <!--伴随移动的小圆点-->
+        <div class="button_container">
+            <span index="1" class="button_container_circle on"></span>
+            <span index="2" class="button_container_circle"></span>
+            <span index="3" class="button_container_circle"></span>
+            <span index="4" class="button_container_circle"></span>
+            <span index="5" class="button_container_circle"></span>
+        </div>
+
+        <!--向左-->
+        <a href="javascript:;" class="prev arrow" >&lt;</a>
+        <!--向右-->  
+        <a href="javascript:;" class="next arrow">&gt;</a> 
+    </div>
+
+</body>
+
+<script>
+
+    window.onload = function (){
+        
+        var index = 1;
+
+        var container = document.getElementsByClassName("container")[0];
+        var banner = document.getElementsByClassName("banner")[0];
+        var img = document.getElementsByClassName("banner_img")[0];
+        var li = document.getElementsByClassName("banner_li");
+        var arrows = document.getElementsByClassName("arrow");
+
+        var buttonContainer = document.getElementsByClassName("button_container")[0];
+
+        var buttons = document.getElementsByClassName("button_container_circle");
+
+        //左
+        var prev = document.getElementsByClassName("prev")[0];
+        //右
+        var next = document.getElementsByClassName("next")[0];
+
+        var timer;
+
+        stopAnimation();
+
+        startAnimation();
+
+        controlMouse();
+
+        bindClickButton();
+
+        //offset
+        var offset = img.offsetWidth ;
+
+        container.style.width = offset + "px";
+        container.style.height = img.offsetHeight + "px";
+        container.style.overflow = "hidden";
+
+
+        // 给banner 设置宽高
+        banner.style.height = img.offsetHeight + "px";
+        banner.style.width = offset * li.length + "px";
+        banner.style.left = -offset + "px"; /*默认位移设置*/
+
+        // 初始化arrow高度
+        for(var i = 0; i < arrows.length; i++){
+            arrows[i].style.top = parseInt(img.offsetHeight)/2 - parseInt(arrows[i].offsetHeight)/2 + "px";
+        }
+
+        //初始化button位置
+        buttonContainer.style.top = img.offsetHeight - 40 + "px";
+        buttonContainer.style.left = (offset - buttonContainer.offsetWidth) / 2 + "px"; 
+
+        prev.onclick = function(){
+
+            index--;
+            animate();
+        }
+
+        next.onclick = function(){
+
+            index++;
+            animate();
+        }
+
+        function animate(){
+
+            banner.style.transition = "0.3s";
+            banner.style.left = -parseInt(offset) * index + "px";
+
+            if(index === 0){
+
+                index = li.length - 2;
+                reLocation();
+
+            }else if(index === li.length - 1){
+
+                index = 1;
+                reLocation();
+            }
+
+            controlButton();
+        }
+
+        function reLocation(){
+            
+            setTimeout(()=>{
+                banner.style.transition = "0s";
+                banner.style.left = -parseInt(offset) * index + "px";   
+            },300)
+
+            
+        }
+
+        function controlButton(){
+
+            var key;
+
+            if(index === 0){
+
+                key = 5;
+            }else if(index === li.length - 1){
+
+                key = 1;
+            }else{
+                
+                key = index;
+            }
+
+            for(var i = 0; i < buttons.length; i++){
+
+                if(key == buttons[i].getAttribute("index")){
+                    buttons[i].className = "button_container_circle on";
+                }else{
+                    buttons[i].className = "button_container_circle";
+                }
+            }
+            
+        }
+        function bindClickButton(){
+
+            for(var i = 0; i < buttons.length; i++){
+
+                (function(ii){
+
+                    buttons[ii].onclick = function(){
+
+                        index = buttons[ii].getAttribute("index");
+                        animate();
+                    }
+                })(i)
+            }
+
+        }
+
+        function startAnimation(){
+
+            timer = setInterval(function(){
+
+                next.onclick();
+            },2000)
+        }
+
+        function stopAnimation(){
+
+            if(timer){
+
+                clearInterval(timer);
+            } 
+        }
+
+        function controlMouse(){
+
+            container.onmouseover = function(){
+
+                stopAnimation();
+            }
+
+            container.onmouseout = function(){
+
+                startAnimation();
+            }
+        }
+
+
+    }
+</script>
+
+</html>
