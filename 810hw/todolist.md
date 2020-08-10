@@ -65,7 +65,7 @@ function search(tasks,name){
 ```
 
 ```js
-var taskItems = document.getElementsByClassName("task-item");
+    var taskItems = document.getElementsByClassName("task-item");
     var inputEle = document.getElementsByClassName('task-input')[0];
     var taskListEle = document.getElementsByClassName("task-list")[0];
     var addBtn = document.getElementsByClassName('add-btn')[0];
@@ -164,8 +164,8 @@ var taskItems = document.getElementsByClassName("task-item");
     function bindCloseEvent(){
         for (var i = 0; i < close.length; i++) {
             close[i].onclick = function() {
-                var parentEle = this.parentElement;
-                parentEle.remove();
+                //var parentEle = this.parentElement;
+                // parentEle.remove();
                 
                 $.ajax({
                     type : 'post',
@@ -175,13 +175,15 @@ var taskItems = document.getElementsByClassName("task-item");
                     },
                     success:(result)=>{
                         var parentEle = this.parentElement;
-                        console.log(parentEle)
+                        console.log(parentEle);
                         parentEle.remove();
                     },
                     error:()=>{
                 
                     }
                 })
+
+
         
             }
         }
