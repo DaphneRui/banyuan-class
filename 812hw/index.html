@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .warning{
+			color:red;
+			width: 100%;
+			margin-bottom: 10px;
+		}
+  </style>
+</head>
+<body>
+  
+    <div class="main">
+
+      <div class="name-div">
+        用户名：
+        <input type="text" class="name"/>
+      </div>
+
+      <div class="password-div">
+        密码：
+        <input type="password" class="password"/>
+      </div>
+
+      <div class="rewrite-div">
+        确认：
+        <input type="password" class="rewrite"/>
+      </div>
+
+      <div>
+        <button type="button" class="submitButton" disabled>注册</button>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="./jquery3.5.js"></script>
+
+    <script>
+      let nameEle = document.getElementsByClassName('name')[0];
+      let passwordEle = document.getElementsByClassName('password')[0];
+      let rewriteEle = document.getElementsByClassName('rewrite')[0];
+      let buttonEle = document.getElementsByClassName('submitButton')[0];  
+      let namediv = document.getElementsByClassName('name-div')[0];
+      let passworddiv = document.getElementsByClassName('password-div')[0];
+      let rewritediv = document.getElementsByClassName('rewrite-div')[0];
+      let nameTestResult = false;
+      let passwordTestResult = false;
+      let rewriteTestResult = false;
+
+      function checkName(){
+        let name = nameEle.value;
+        if(name){
+          $.ajax({
+            type : 'post',
+            url : 'http://localhost:3000/checkName',
+            data :{
+              name
+            },
+            success : (data)=>{
+              let warningEle = document.getElementsByClassName('warning name')[0];
+
+              let flag = data.flag;
+
+              if(flag){
+                // 清空warning
+                if(warningEle){
+
+                    warningEle.remove();
+                }
+              }else{
+                // 显示warning
+                if(warningEle){
+
+                  warningEle.remove();
+                }
+                var ele = createWarning('name', data.message);
+
+                if(!warningEle){
+                    namediv.append(ele);
+                }
+              
+              }
+              nameTestResult = flag;
+              enableButton();
+            },
+            error : (error)=>{
+
+            }
+          })
+        }
+      }
+
+        /* 检测密码 */
+        function checkPassword(){
+
+          // value
+          var password = passwordEle.value;
+
+          // reg
+          var partten = /^\w{8,15}$/;
+
+          var flag = partten.test(password);
+
+          var warningEle = document.getElementsByClassName('warning password')[0];
+
+          if(flag){
+              // 清空warning
+
+              // ele 存在 remove
+              if(warningEle){
+
+                  warningEle.remove();
+              }
+
+          }else{
+            if(warningEle){
+
+              warningEle.remove();
+            }
+              // 显示warning
+              var ele = createWarning('password','密码格式错误，password的长度不小于8位，不大于15位');
+              
+              // 如果ele不存在
+              if(!warningEle){
+                  passworddiv.append(ele);
+              }
+          }
+
+          passowrdTestResult = flag;
+          
+          enableButton();
+        }
+
+        /* 检测再次输入密码 */
+        function checkRewrite(){
+
+            let password = passwordEle.value;
+
+            let rewrite = rewriteEle.value; 
+
+            let flag = (password === rewrite);
+
+            let warningEle = document.getElementsByClassName('warning rewrite')[0];
+
+            if(flag){
+              if(warningEle){
+
+                warningEle.remove();
+              }
+            }else{
+              if(warningEle){
+
+                warningEle.remove();
+              }
+
+              let ele = createWarning('rewrite','密码不同，请重新输入');
+              
+              if(!warningEle){
+
+                  rewritediv.append(ele);
+              }
+              rewriteTestResult = flag;
+              enableButton();
+            }
+					}
+
+        /* 激活button */
+        function enableButton(){
+
+          buttonEle.disabled = !(nameTestResult && passwordTestResult && rewriteTestResult)
+        }
+
+
+        /* 创建提示元素 */
+        function createWarning(target,content){
+
+          var ele = document.createElement('div');
+
+          ele.className = 'warning ' + target;
+
+          ele.innerHTML = content;
+
+          return ele;
+        }
+
+        function regist(){
+
+          $.ajax({
+            type : 'post',
+            url : 'http://localhost:3000/regist',
+            data : {
+              name : nameEle.value,
+              password : passwordEle.value,
+              rewrite : rewriteEle.value
+            },
+            success : (data)=>{
+              if(data.status){
+              alert('发送成功');
+              }else{
+              alert(data.message);
+              }
+            },
+            error : (error)=>{
+
+            }
+
+          })
+        }
+
+        /* 绑定事件 */
+        nameEle.onblur = checkName;
+
+        passwordEle.onblur = checkPassword;
+
+        rewriteEle.onblur = checkRewrite;
+
+        buttonEle.onclick = regist;
+    </script>
+</body>
+</html>
