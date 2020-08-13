@@ -1,0 +1,93 @@
+{% extends 'layout.njk' %}
+{% block content %}
+    <div>
+    姓名:
+    <input type="text" class = "name"/>
+</div>
+
+<div>
+    性别:
+    <select class = "gender">
+        <option value="0">女</option>
+        <option value="1">男</option>   
+    </select>
+</div>
+
+<div>
+    年龄:
+    <input type="text" class = "age"/>
+</div>
+
+<div>
+    学科:
+    <select class='major'>
+        <option value="web">web</option>
+        <option value="java">java</option>   
+    </select>
+</div>
+
+<div>
+
+    <button class="send">提交</button>
+</div>
+
+
+<div class='student-list'>
+
+    {% for item in students %}
+
+     
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block script %}
+    
+<script>
+
+    let senBtn= document.getElementsByClassName('send')[0]; 
+    let nameEle = document.getElementsByClassName('name')[0];
+    let ageEle = document.getElementsByClassName('age')[0]; 
+    
+    let genderSelector = document.getElementsByClassName('gender')[0];
+    const genderIndex = genderSelector.selectedIndex;
+    const gender = genderSelector.options[genderIndex];
+    const genderValue = gender.value;
+
+    // 获取selector中option的方式
+    let majorSelector = document.getElementsByClassName('major')[0];
+    const majorIndex = majorSelector.selectedIndex;
+    const major = majorSelector.options[genderIndex];
+    const majorValue = major.value;
+   
+
+    senBtn.onclick = function(){
+
+          $.ajax({
+            type : 'post',
+            url : 'http://localhost:3000/student',
+            data : {
+              name : nameEle.value,
+              gender : genderValue,
+              age : ageEle.value,
+              major : majorValue
+            },
+            success : (result)=>{
+              
+              alert('提交成功');
+             
+            },
+            error : (error)=>{
+
+            }
+
+          })
+        }
+
+    
+
+
+</script>
+
+{% endblock %}
