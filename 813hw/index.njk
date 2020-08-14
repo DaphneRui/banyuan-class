@@ -36,7 +36,19 @@
 
     {% for item in students %}
 
-     
+    <div>
+        <span>
+            {{item.name}}
+            {% if item.gender === 1 %}
+            男
+            {% else %}
+            女
+            {% endif %}
+            {{item.age}}岁    
+            学习{{item.major}}    
+        </span>
+    <div>
+    
     {% endfor %}
 </div>
 
@@ -46,32 +58,37 @@
     
 <script>
 
-    let senBtn= document.getElementsByClassName('send')[0]; 
+    let sendBtn= document.getElementsByClassName('send')[0]; 
     let nameEle = document.getElementsByClassName('name')[0];
     let ageEle = document.getElementsByClassName('age')[0]; 
+    let genderEle = document.getElementsByClassName('gender')[0];
+    let majorEle = document.getElementsByClassName('major')[0];
     
-    let genderSelector = document.getElementsByClassName('gender')[0];
-    const genderIndex = genderSelector.selectedIndex;
-    const gender = genderSelector.options[genderIndex];
-    const genderValue = gender.value;
+    function getGender(){
+        const index = genderEle.selectedIndex;
+        const gender = genderEle.options[index];
+        return gender.value;
+    }
 
-    // 获取selector中option的方式
-    let majorSelector = document.getElementsByClassName('major')[0];
-    const majorIndex = majorSelector.selectedIndex;
-    const major = majorSelector.options[genderIndex];
-    const majorValue = major.value;
+    function getMajor(){
+        const index = majorEle.selectedIndex;
+        const major = majorEle.options[index];
+        return major.value;
+    }
+
+   
    
 
-    senBtn.onclick = function(){
+    sendBtn.onclick = function(){
 
           $.ajax({
             type : 'post',
             url : 'http://localhost:3000/student',
             data : {
               name : nameEle.value,
-              gender : genderValue,
+              gender : getGender(),
               age : ageEle.value,
-              major : majorValue
+              major : getMajor()
             },
             success : (result)=>{
               
@@ -84,9 +101,6 @@
 
           })
         }
-
-    
-
 
 </script>
 
