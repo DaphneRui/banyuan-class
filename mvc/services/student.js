@@ -1,4 +1,7 @@
-const { insertOne } = require('../models/student')
+const _ = require('lodash')
+const moment = require('moment')
+const { insertOne, find } = require('../models/student')
+
 
 /*
  * 增加学生
@@ -16,15 +19,38 @@ async function addStudent(data){
     await insertOne(data)
   }else{
 
-    result.status = 'falied'
+    result.status = 'failed'
     result.message = '没有用户名'
   }
 
   return result
 }
 
+/*
+*获取学生
+*/
+async function getStudent(data){
+
+  // return await find({
+  //   createdAt:{
+  //     $lte:moment().toDate(),
+  //     $gte:moment().subtract(1,'day').toDate()
+  //   }
+  // })
+  let students = await find(data)
+  students = _.map(students,(item)=>{
+    item.gender = item.gender == '1' ? '男':'女'
+    return item 
+  })
+  return students
+}
+
+
+
+
 
 module.exports = {
 
-  addStudent
+  addStudent,
+  getStudent,
 }
