@@ -69,6 +69,10 @@
     align-items: center;
 }
 
+.container-form{
+    display: flex;
+}
+
 .container-input{
     width: 450px;
     height: 16px;
