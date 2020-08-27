@@ -137,6 +137,8 @@
    
 </body>
 
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+
     <script>
 
         //拿到所有的items
@@ -188,9 +190,13 @@
         }
 
         //当页面尺寸发生变化时,触发函数,实现响应式
-        window.onresize = function(){
+        // window.onresize = function(){
+        //     waterFull();
+        // }
+
+        window.onresize = _.throttle(()=>{
             waterFull();
-        }
+        },500)
 
     </script>
 

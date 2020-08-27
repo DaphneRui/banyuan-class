@@ -1,0 +1,136 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    width: 320px;
+    height: 550px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu{
+    width: 100%;
+    font-size: 16px;
+}
+
+.menu-list{
+    width: 100%;
+    height: 20px;
+    margin-bottom: 23px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-name{
+    height: 30px;
+    line-height: 30px;
+}
+
+.menu-price-count{
+    display: flex;
+}
+
+.menu-count-container{
+    display: flex;
+}
+
+.menu-add-btn{
+    height:30px;
+    width: 30px;
+    background-color: black;
+    color:white;
+    text-align: right;
+    line-height: 30px;
+    border:0;
+    font-size: 18px;
+    padding-right: 10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 0px;
+    outline: none;
+    cursor: pointer;
+}
+
+.menu-price{
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+}
+
+.menu-remove-btn{
+    height:30px;
+    width: 30px;
+    background-color: black;
+    color:white;
+    line-height: 30px; 
+    border:0;
+    font-size: 18px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 15px;
+    outline: none;
+    cursor: pointer;
+}
+
+.menu-count{
+    height:30px;
+    width: 24px;
+    background-color: black;
+    color:white;
+    line-height: 30px;
+    font-size: 18px;
+    text-align: center; 
+}
+
+.total{
+    width: 100%;
+    border-top: 1px solid grey;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.total-container{
+    font-size: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.place-order-btn{
+    width: 280px;
+    height: 40px;
+    border-radius: 40px;
+    background-color: #0d9e65;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+}
+
+.modal{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0,0.5);
+    position: fixed;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>827hw</title>
+    <link rel="stylesheet" href="827hw.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="menu">
+            
+            <div class="menu-list">
+                <div class="menu-name">叉烧芋粒饺</div>
+                <div class="menu-price-count">
+                    <div class="menu-price">$5.95</div>
+
+                    <div class="menu-count-container">
+                        <button class="menu-remove-btn">
+                            -
+                        </button>
+                        <div class="menu-count">
+                            1
+                        </div>
+                        <button class="menu-add-btn">
+                            +
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="menu-list">
+                <div class="menu-name">菜肉饺</div>
+
+                <div class="menu-price-count">
+                    <div class="menu-price">$6.50</div>
+
+                    <div class="menu-count-container">
+                        <button class="menu-remove-btn">
+                            -
+                        </button>
+                        <div class="menu-count">
+                            1
+                        </div>
+                        <button class="menu-add-btn">
+                            +
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="menu-list">
+                <div class="menu-name">菜饺</div>
+
+                <div class="menu-price-count">
+                    <div class="menu-price">$6.50</div>
+
+                    <div class="menu-count-container">
+                        <button class="menu-remove-btn">
+                            -
+                        </button>
+                        <div class="menu-count">
+                            1
+                        </div>
+                        <button class="menu-add-btn">
+                            +
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="menu-list">
+                <div class="menu-name">上海锅贴</div>
+
+                <div class="menu-price-count">
+                    <div class="menu-price">$6.50</div>
+
+                    <div class="menu-count-container">
+                        <button class="menu-remove-btn">
+                            -
+                        </button>
+                        <div class="menu-count">
+                            1
+                        </div>
+                        <button class="menu-add-btn">
+                            +
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="menu-list">
+                <div class="menu-name">干锅煎饺</div>
+
+                <div class="menu-price-count">
+                    <div class="menu-price">$6.95</div>
+
+                    <div class="menu-count-container">
+                        <button class="menu-remove-btn">
+                            -
+                        </button>
+                        <div class="menu-count">
+                            1
+                        </div>
+                        <button class="menu-add-btn">
+                            +
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="total">
+            <div class="total-container">
+                <p>总价:</p>
+                <p>$32.4</p>
+            </div>
+            <button class="place-order-btn">确认下单</button>
+        </div>
+
+    </div>
+
+    <div class="modal">
+        <img src="./loading.gif" alt="">
+    </div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+
+<script>
+    let placeOrderBtn = document.getElementsByClassName('place-order-btn')[0]
+    let modal = document.getElementsByClassName('modal')[0]
+    let timer
+
+    placeOrderBtn.onclick = _.throttle(()=>{
+
+        modal.style.display = 'flex'
+
+    },1000)
+
+    // placeOrderBtn.onclick = _.debounce(()=>{
+
+    //     console.log(1)
+
+    // },500)
+
+    function fakeDismiss(){
+
+        if(timer){
+            clearTimeout(timer)
+        }
+
+        timer = setTimeout(()=>{
+            modal.style.display = 'none'
+        },2000)
+
+    }
+
+</script>
+
+</html>
