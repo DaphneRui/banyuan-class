@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度</title>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        .header{
+            height: 52px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 9px;
+            padding: 0 16px;
+        }
+
+        .icon{
+            color: rgb(219, 212, 212);
+        }
+
+        .icon-right{
+            width: 16px;
+            height: 16px;
+        }
+
+        .logo{
+            display: flex;
+            justify-content: center;
+            padding-bottom: 30px;
+        }
+
+        .logo-image{
+            width: 180px;
+            height: 57px;
+        }
+
+        .search{
+            display: flex;
+            justify-content: center;
+            margin: 0 16px;
+            position: relative;
+        }
+
+        .search-input{
+            height: 44px;
+            display: flex;
+            flex: 1;
+            padding: 7px 42px 7px 6px;
+            outline: none;
+            border-right: none;
+        }
+
+        .icon-microphone{
+            position: absolute;
+            right: 65px;
+        }
+
+        .icon-camera{
+            position: absolute;
+            right: 12px;
+        }
+
+        .icon-line{
+            position: absolute;
+            right: 48px;
+            color: rgb(219, 212, 212);
+        }
+
+        .search-icon{
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-button{
+            height: 62px;
+            width: 81px;
+            background-color: #fff;
+            color: #38f;
+            font-size: 16px;
+            font-weight: 700;
+            border-left: 1px solid #e8e8e8;
+            outline: none;
+        }
+
+        .bar{
+            height: 10px;
+            background-color: #f8f8f8;
+            margin-top: 20px;
+        }
+
+        .container{
+            padding: 10px 0;
+            margin: 0 16px;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .news{
+            padding: 6px 0;
+        }
+
+        .news-title{
+            font-size: 18px;
+            margin-bottom: 3px;
+            
+        }
+
+        .news-actor{
+            display: flex;
+            font-size: 13px;
+            color: #999999;
+        }
+
+        .news-important{
+            color: #EC4345;
+            margin-right: 8px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="header">
+        <i class="fa fa-bars icon fa-lg" aria-hidden="true"></i>
+        <img src="https://m.baidu.com/bdlogo/squareicon_e582f4c48e93901e747536ad982e030d.png" alt="" class="icon-right">
+    </div>
+
+    <div class="logo">
+        <img src="https://www.baidu.com/img/flexible/logo/plus_logo_web.png" alt="" class="logo-image">
+    </div>
+    
+    <div class="search">
+
+        <input type="text" class="search-input">
+
+        <div class="search-icon">
+            <i class="fa fa-microphone icon-microphone fa-lg" aria-hidden="true"></i>
+            <div class="icon-line">|</div>
+            <i class="fa fa-camera icon-camera fa-lg" aria-hidden="true"></i>
+        </div>
+        
+        <button class="search-button">百度一下</button>
+
+    </div>
+
+    <div class="bar"></div>
+
+    <div class="container">
+        <div class="news">
+            <div class="news-title">
+                开学季, 重温习近平青春成长故事
+            </div>
+            <div class="news-actor">
+                <div class="news-important">置顶</div>
+                <div>央视新闻网</div>
+            </div>
+        </div>
+
+        <div class="news">
+            <div class="news-title">
+                办好思政课, 讲好思政课
+            </div>
+            <div class="news-actor">
+                <div class="news-important">置顶</div>
+                <div>央视新闻网</div>
+            </div>
+        </div>
+
+        <div class="news">
+            <div class="news-title">
+                节奏稳、脚步实 中国持续扩大金融开放
+            </div>
+            <div class="news-actor">
+                <div>新华网客户端</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+</script>
+
+</html>
