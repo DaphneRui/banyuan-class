@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+
+        <div>
+        姓名
+        <input type="text" class="name"/>
+        </div>
+        
+        <div>
+            性别
+            <select class="gender">
+                <option value="0">男</option>
+                <option value="1">女</option>
+            </select>
+        </div>
+        <div>
+
+        年龄
+        <input type="text" class="age"/>
+        </div>
+
+        <div>
+        班级
+        <select class="major">
+            <option value="0">web</option>
+            <option value="1">java</option>
+        </select>
+        </div>
+
+        <div class="result"></div>
+
+    </div>
+</body>
+
+<script>
+    
+    let nameEle = document.getElementsByClassName('name')[0]
+    let genderEle = document.getElementsByClassName('gender')[0]
+    let ageEle = document.getElementsByClassName('age')[0]
+    let majorEle = document.getElementsByClassName('major')[0]
+    let resultEle = document.getElementsByClassName('result')[0]
+
+    // function getGender(){
+    //     const index = genderEle.selectedIndex;
+    //     // const gender = genderEle.options[index];
+    //     return index;
+    // }
+
+    // function getMajor(){
+    //     const index = majorEle.selectedIndex;
+    //     // const major = majorEle.options[index];
+    //     return index;
+    // }
+
+    function set (key,value){
+
+        localStorage.setItem(key,JSON.stringify(value))
+    }
+
+    function get(key){
+
+        return JSON.parse(localStorage.getItem(key))
+    }
+
+    window.onload = function(){
+
+        resultEle.innerHTML = ''
+
+        let name = get('nameEle')
+        let gender = get('genderEle')
+        let age = get('ageEle')
+        let major = get('majorEle')
+
+        let flag = name && gender && age && major
+
+        if(flag){
+
+            nameEle.value = name
+            genderEle.selectedIndex = gender
+            ageEle.value = age
+            majorEle.selectedIndex = major
+
+            if(gender === '0'){
+                gender = '男'
+            }else{
+                gender = '女'
+            }
+            if(major === '0'){
+                major = 'web'
+            }else{
+                major = 'java'
+            }
+
+
+            resultEle.innerHTML = '<span>' + name + ' </span>' + '<span>性别: ' + gender + ' </span>' + '<span>' + age + '岁 </span>' + '<span>学习' + major + ' </span>'
+            
+        }else{
+            resultEle.innerHTML = ''
+        }
+    }
+
+    nameEle.onblur = function(){
+
+        let name = nameEle.value
+
+        if(name){
+
+            set('name',name)
+        }
+
+    }
+
+    genderEle.onblur = function(){
+
+        let gender = genderEle.selectedIndex
+
+        
+
+            set('gender',gender)
+        
+
+    }
+
+    ageEle.onblur = function(){
+
+        let age = ageEle.value
+
+        if(age){
+
+            set('age',age)
+        }
+
+    }
+
+    majorEle.onblur = function(){
+
+        let major = majorEle.selectedIndex
+
+        if(major){
+
+            set('major',major)
+        }
+
+    }
+
+    
+
+
+</script>
+
+</html>
