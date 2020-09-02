@@ -6,7 +6,7 @@
 }
 
 .header{
-    width: 100%;
+    min-width: 1330px;
     height: 35px;
     background-color: #f5f5f5;
     border-bottom: 1px solid #eee;
@@ -21,12 +21,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .header-switch{
+    width: 80px;
     height: 35px;
     display: flex;
-    padding: 0 6px;
+    margin: 0 6px;
     line-height: 35px;
 }
 
@@ -60,6 +62,7 @@
 }
 
 .top{
+    min-width: 1140px;
     height: 97px;
     padding: 15px 125px 0 125px;
     display: flex;
@@ -197,6 +200,7 @@
 
 .guide{
     background-color: #ff9000;
+    min-width: 1080px;
     height: 30px;
     padding: 0 125px; 
     margin-top: 10px;
@@ -207,7 +211,8 @@
 
 .guide-title{
     background-color: #ff5000;
-    width: 190px;
+    min-width: 190px;
+    height: 30px;
     color: #fff;
     font-size: 16px;
     display: flex;
@@ -224,6 +229,7 @@
 }
 
 .guide-container{
+    width: 64px;
     color: #fff;
     font-size: 14px;
     margin: 0 10px;
@@ -236,12 +242,14 @@
 }
 
 .main-left{
+
     display: flex;
     flex-direction: column;
 }
 
-.main-left-continer{
+.main-left-container{
     display: flex;
+    width: 900px;
 }
 
 .list-container{
@@ -322,6 +330,7 @@
 .main-right{
     background-color: #fff;
     margin-top: 10px;
+    width: 290px;
 }
 
 .main-right-top{
@@ -567,6 +576,7 @@
 }
 
 .container{
+    min-width: 1080px;
     padding: 10px 125px;
     background-color: #f5f5f5;
     display: flex;
@@ -598,7 +608,9 @@
 }
 
 .container-left ul{
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     list-style: none;
@@ -620,6 +632,7 @@
 }
 
 .end{
+    min-width: 1080px;
     background-color: #f5f5f5;
     padding: 0 125px;
 }
@@ -680,13 +693,16 @@
 }
 
 .mod ul{
+    width: 200px;
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 10px;
 }
 
 .mod li{
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-top: 5px;
 }
 
 .footer{
@@ -721,6 +737,7 @@
 
 .smallbox{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .icon-2{
@@ -729,6 +746,7 @@
     height: 35px;
     background-position: 0 0;
     margin: 0 40px;
+    margin-top: 10px;
 }
 
 .icon-3{
@@ -737,6 +755,7 @@
     height: 35px;
     background-position: -40px 0;
     margin-right: 40px;
+    margin-top: 10px;
 }
 
 .icon-4{
@@ -745,6 +764,7 @@
     height: 35px;
     background-position: -80px 0;
     margin-right: 40px;
+    margin-top: 10px;
 }
 
 .icon-5{
@@ -753,12 +773,14 @@
     height: 35px;
     background-position: -140px 0;
     margin-right: 40px;
+    margin-top: 10px;
 }
 
 .icon-img{
     height: 35px;
     background-position: -450px 0;
     margin-right: 40px;
+    margin-top: 10px;
 }
 
 .icon-6{
@@ -767,6 +789,7 @@
     height: 35px;
     background-position: -650px 0;
     margin-right: 40px;
+    margin-top: 10px;
 }
 
 .icon-7{
@@ -775,6 +798,7 @@
     height: 35px;
     background-position: -345px 0;
     margin-right: 40px;
+    margin-top: 10px;
 }
 
 .icon-7{
@@ -783,6 +807,7 @@
     height: 35px;
     background-position: -760px 0;
     margin-right: 40px;
+    margin-top: 10px;
 }
 
 .icon-8{
