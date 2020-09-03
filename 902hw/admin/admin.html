@@ -236,7 +236,7 @@
                         </td>
                         <td><span class="badge bg-success">100%</span></td>
                         <td>
-                            <button type="button" class="btn btn-block btn-info btn-success" data-toggle="modal" data-target="#modal-lg">查看</button>
+                            <button type="button" class="btn btn-block btn-info btn-success button" data-toggle="modal" data-target="#modal-lg" data-level="第一阶段" data-progress="100%">查看</button>
                         </td>
                       </tr>
                       <tr>
@@ -249,7 +249,7 @@
                         </td>
                         <td><span class="badge bg-success">100%</span></td>
                         <td>
-                          <button type="button" class="btn btn-block btn-info btn-success" data-toggle="modal" data-target="#modal-lg">查看</button>
+                          <button type="button" class="btn btn-block btn-info btn-success button" data-toggle="modal" data-target="#modal-lg" data-level="第二阶段" data-progress="100%">查看</button>
                         </td>
                       </tr>
                       <tr>
@@ -262,7 +262,7 @@
                         </td>
                         <td><span class="badge bg-success">100%</span></td>
                         <td>
-                          <button type="button" class="btn btn-block btn-info btn-success" data-toggle="modal" data-target="#modal-lg">查看</button>
+                          <button type="button" class="btn btn-block btn-info btn-success button" data-toggle="modal" data-target="#modal-lg" data-level="第三阶段" data-progress="100%">查看</button>
                         </td>
                       </tr>
                       <tr>
@@ -275,7 +275,7 @@
                         </td>
                         <td><span class="badge bg-primary">90%</span></td>
                         <td>
-                          <button type="button" class="btn btn-block btn-info btn-success" data-toggle="modal" data-target="#modal-lg">查看</button>
+                          <button type="button" class="btn btn-block btn-info btn-success button" data-toggle="modal" data-target="#modal-lg" data-level="第四阶段" data-progress="90%">查看</button>
                         </td>
                       </tr>
                       <tr>
@@ -288,7 +288,7 @@
                         </td>
                         <td><span class="badge bg-danger">0%</span></td>
                         <td>
-                          <button type="button" class="btn btn-block btn-info btn-success" data-toggle="modal" data-target="#modal-lg">查看</button>
+                          <button type="button" class="btn btn-block btn-info btn-success button" data-toggle="modal" data-target="#modal-lg" data-level="第五阶段" data-progress="0%">查看</button>
                         </td>
                       </tr>
                       <tr>
@@ -301,7 +301,7 @@
                         </td>
                         <td><span class="badge bg-danger">0%</span></td>
                         <td>
-                          <button type="button" class="btn btn-block btn-info btn-success" data-toggle="modal" data-target="#modal-lg">查看</button>
+                          <button type="button" class="btn btn-block btn-info btn-success button" data-toggle="modal" data-target="#modal-lg" data-level="第六阶段" data-progress="0%">查看</button>
                         </td>
                       </tr>
                     </tbody>
@@ -347,11 +347,11 @@
             </button>
           </div>
           <div class="modal-body" style="display: flex; justify-content: center; align-items: center;">
-            <p></p>
+            <p class="modal-content-p"></p>
           </div>
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary savesuccess">Save changes</button>
+            <button type="button" class="btn btn-primary swalDefaultSuccess">Save changes</button>
           </div>
         </div>
         <!-- /.modal-content -->
@@ -385,7 +385,7 @@
           timer: 3000
         });
     
-        $('.savesuccess').click(function() {
+        $('.swalDefaultSuccess').click(function() {
           Toast.fire({
             icon: 'success',
             title: '查看成功'
@@ -394,16 +394,23 @@
         
       });
     
-      let table = document.getElementsByClassName('table')[0]
-      let child = table.getElementsByTagName("tr")[rowIndex - 1];
+      let buttons = document.getElementsByClassName('button')
+      let modalTitle = document.getElementsByClassName('modal-title')[0]
+      let modalContent = document.getElementsByClassName('modal-content-p')[0]
 
-      function GetRowNo() { 
-        var e = e || window.event; 
-        var target = e.target || e.srcElement; 
-        if (target.parentNode.tagName.toLowerCase() == "td") { 
-          rowIndex = target.parentNode.parentNode.rowIndex; 
-        } 
-      } 
+
+      for(let i = 0; i < buttons.length; i++){
+
+        buttons[i].onclick = function(){
+
+          let level = buttons[i].getAttribute('data-level')
+          let progress = buttons[i].getAttribute('data-progress')
+
+          modalTitle.innerText = level
+          modalContent.innerText = progress
+
+        }
+      }
 
 
     </script>
