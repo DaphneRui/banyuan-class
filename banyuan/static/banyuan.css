@@ -328,6 +328,7 @@ input{
     border: 0;
     height: 40px;
     width: 100%;
+    padding-left: 10px;
 }
 
 .form-title{
@@ -341,6 +342,11 @@ input{
     display: flex;
     align-items: start;
     justify-content: start;
+}
+
+.form-message::-webkit-input-placeholder{
+    position: relative;
+    top: -30px;
 }
 
 .form-button{
