@@ -1,0 +1,7 @@
+.header-right{
+    display: flex !important;
+}
+
+.contact-message{
+    justify-content: flex-end;
+}

@@ -1,0 +1,30 @@
+.header{
+    flex-wrap: wrap;
+}
+
+.header-right{
+    flex-direction: column;
+    width: 100vw;
+    order: 2;
+    align-items: flex-start;
+    background-color: #414B62;
+    position: absolute;
+    top: 80px;
+    display: none;
+    z-index: 999;
+}
+
+.header-right-a{
+    height: 66px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-button{
+    display: block;
+}
+
+
+
+
