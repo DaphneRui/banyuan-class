@@ -8,6 +8,8 @@
 }
 
 .header{
+    position: fixed;
+    width: 100%;
     height: 100px;
     display: flex;
     flex-direction: row;
@@ -15,6 +17,7 @@
     align-items: center;
     flex-wrap: nowrap;
     transition: all 0.5s;
+    z-index: 99;
 }
 
 .header-left{
@@ -46,8 +49,12 @@
     z-index: 99;
 }
 
-.header-right-a :hover{
-    color: #7d7340;
+.header-right-a:hover{
+    color: #7d7340 ;
+}
+
+.click{
+    color: #7d7340 ;
 }
 
 .header-button{
@@ -91,7 +98,7 @@
 }
 
 .home-container{
-    height: calc(100vh - 100px);
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

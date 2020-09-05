@@ -5,18 +5,29 @@ $(window).scroll(function(){
     controlHeader();
 })
 
-$('.header-right-a').click(function(event){
+function removeClick(){
+    $('.header-right-a').removeClass('click')
+}
 
-    event.preventDefault();
+$('.header-right-a').each(function(){
+    $(this).click(function(event){
 
-    let href = $(this).attr('href');
+        removeClick()
 
-    if($(`.${href}`).length > 0){
-        $('html, body').stop().animate({
-            /* scrolltop动画，跳转到对应元素的最顶端 */
-            scrollTop: $(`.${href}`).offset().top
-        }, 500,'linear');
-    }
+        event.preventDefault();
+
+        let href = $(this).attr('href');
+
+        if($(`.${href}`).length > 0){
+            $('html, body').stop().animate({
+                /* scrolltop动画，跳转到对应元素的最顶端 */
+                scrollTop: $(`.${href}`).offset().top
+                
+            }, 500,'linear');
+        }
+
+        $(this).addClass('click')
+    })
 })
 
 function controlHeader(){
@@ -31,19 +42,26 @@ function controlHeader(){
 }
 
 let btnEle = document.getElementsByClassName('header-button')[0]
-let guide = document.getElementsByClassName('header-right')[0]
+let guideEle = document.getElementsByClassName('header-right')[0]
+
+
 
 btnEle.onclick = function(){
 
-    if(guide.style.display == 'flex'){
-        guide.style.display = 'none'
+    if(guideEle.style.display == 'flex'){
+        guideEle.style.display = 'none'
     }else{
-        guide.style.display = 'flex'
+        guideEle.style.display = 'flex'
     }
-    
 
 }
 
+window.onresize = function(){
+    let width = document.body.clientWidth
+    if(width > 1024){
+        guideEle.style.display =  'none'
+    }
+}
 
 
 window.onload = function(){
