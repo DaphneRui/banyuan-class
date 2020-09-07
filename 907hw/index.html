@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        .header{
+            padding: 20px 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        
+        .list{
+            padding: 10px 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .bg{
+            background-color: #dadce0;
+        }
+
+        .image{
+            width: 50px;
+            height: 50px;
+        }
+
+        .list div{
+            width: 12.5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header div{
+            width: 12.5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+
+</head>
+<body>
+    
+    <div id="app">
+            <div class="header bg">
+                <div></div>
+                <div>姓名</div>
+                <div>数学</div>
+                <div>语文</div>
+                <div>英语</div>
+                <div>地理</div>
+                <div>历史</div>
+                <div>总分</div>
+            </div>
+            <div v-for="(item, index) in list">
+                <div :class="['list', index === 1 ? 'bg' : '', index === 3 ? 'bg' : '']">
+                    <div>
+                        <img v-if=" index === 0 " src="./第一名.jpg" alt="" class="image">
+                        <img v-else-if=" index === 1 " src="./第二名.jpeg" alt="" class="image">
+                        <img v-else-if=" index === 2 " src="./第三名.jpeg" alt="" class="image">
+                        <div v-else class="image"></div>
+                    </div>
+
+                    <div>{{ item.name }}</div>
+                    
+                    <template v-for="itemson in item.score">   
+                        <div>{{ itemson.math }}</div>
+                        <div>{{ itemson.chinese }}</div>
+                        <div>{{ itemson.english }}</div>
+                        <div>{{ itemson.geography }}</div>
+                        <div>{{ itemson.history }}</div>      
+                    </template>
+                    
+                    <div>{{ item.allCount }}</div>
+                </div>
+            </div>
+        
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app', 
+            data(){
+                return{
+                    list: [
+                    {
+                        name: '肖锋',
+                        score: [{
+                            math: 99, chinese: 100, english: 100, geography: 99, history: 98
+                        }],
+                        allCount: 496
+                    },
+                    {
+                        name: '安澜',
+                        score: [{
+                            math: 90, chinese: 98, english: 89, geography: 96, history: 100
+                        }],
+                        allCount: 473
+                    },
+                    {
+                        name: '路小北',
+                        score: [{
+                            math: 88, chinese: 87, english: 77, geography: 86, history: 78
+                        }],
+                        allCount: 416
+                    },
+                    {
+                        name: '许巍',
+                        score: [{
+                            math: 39, chinese: 40, english: 76, geography: 90, history: 59
+                        }],
+                        allCount: 304
+                    }
+                ]
+                    
+                }
+            }
+        })
+
+        
+    </script>
+</body>
+</html>
+
