@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .container{
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+            padding: 50px;
+            border: 1px solid white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #000;
+        }
+
+        .menu{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f3f3f3;
+            margin-bottom: 20px;
+            line-height: 50px;
+            padding: 0px 20px;
+            border-radius: 5px;
+        }
+
+        .menu h2{
+            font-size: 16px;
+            margin-right: 20px;
+        }
+
+        .menu-count-container{
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-add-btn{
+            height:30px;
+            width: 30px;
+            background-color: black;
+            color:white;
+            text-align: right;
+            line-height: 30px;
+            border:0;
+            font-size: 18px;
+            padding-right: 10px;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: 0px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .menu-remove-btn{
+            height:30px;
+            width: 30px;
+            background-color: black;
+            color:white;
+            line-height: 30px; 
+            border:0;
+            font-size: 18px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 15px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .menu-count{
+            height:30px;
+            width: 24px;
+            background-color: black;
+            color:white;
+            line-height: 30px;
+            font-size: 18px;
+            text-align: center; 
+        }
+
+        .total{
+            font-size: 20px;
+            margin-top: 40px;
+            margin-left: 350px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="app"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+
+        let vm = new Vue({
+            el: "#app",
+            template: `
+                <div class="container">
+                    <div class="menu" v-for="item in list">
+                        
+                        <h2>{{ item.name }}</h2>
+                        
+                        <div class="menu-count-container">
+                            <h2>￥: {{ item.price }}</h2>
+                            <button class="menu-remove-btn" @click="sub(item)">
+                                -
+                            </button>
+                            <div class="menu-count">
+                                {{ item.count }}
+                            </div>
+                            <button class="menu-add-btn" @click="add(item)">
+                                +
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="total">
+                        总价格: {{ total }}
+                    </div>
+                    
+                </div>
+
+            `,
+            data(){
+                return{
+                    list: [
+                        {name: '香蕉', price: 10, count: 1},
+                        {name: '苹果', price: 20, count: 1},
+                        {name: '榴莲', price: 30, count: 1},
+                        {name: '葡萄', price: 50, count: 1}
+                    ],
+                }
+                
+            },
+            created:function(){ 
+                this.count();
+            },
+            methods: {
+                //相减
+                sub:function (item) {
+                    item.count--;
+                    if(item.count < 1){
+                        item.count = 1
+                        alert("商品数量最少不少于1个")
+                    }
+                    this.count()
+                },
+                //相加
+                add:function (item) {
+                    item.count++;
+                    if(item.count > 4){
+                        item.count = 4
+                        alert("商品数量最多不超过4个")
+                    }
+                    this.count()
+                },
+                count:function () {
+                    let totalPrice = 0;//临时总价
+                    this.list.forEach(function (item,index) {
+                        totalPrice += item.count * item.price;//累计总价
+                    });
+                    this.total = parseFloat(totalPrice);
+                    
+                }
+            }
+        })
+
+    </script>
+
+</body>
+</html>
