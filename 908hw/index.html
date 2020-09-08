@@ -138,9 +138,18 @@
                 }
                 
             },
-            created:function(){ 
-                this.count();
+            computed:{
+                total:function(){
+                    var totalPrice=0;
+                    for(let i = 0; i < this.list.length; i++){
+                        totalPrice += this.list[i].price * this.list[i].count;
+                    }
+                    return totalPrice;
+                }
             },
+            // created:function(){ 
+            //     this.count();
+            // },
             methods: {
                 //相减
                 sub:function (item) {
@@ -149,7 +158,7 @@
                         item.count = 1
                         alert("商品数量最少不少于1个")
                     }
-                    this.count()
+                    // this.count()
                 },
                 //相加
                 add:function (item) {
@@ -158,16 +167,15 @@
                         item.count = 4
                         alert("商品数量最多不超过4个")
                     }
-                    this.count()
+                    // this.count()
                 },
-                count:function () {
-                    let totalPrice = 0;//临时总价
-                    this.list.forEach(function (item,index) {
-                        totalPrice += item.count * item.price;//累计总价
-                    });
-                    this.total = parseFloat(totalPrice);
-                    
-                }
+                // count:function () {
+                //     let totalPrice = 0;//临时总价
+                //     this.list.forEach(function (item,index) {
+                //         totalPrice += item.count * item.price;//累计总价
+                //     });
+                //     this.total = parseFloat(totalPrice);   
+                // }
             }
         })
 
