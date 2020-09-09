@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .container{
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+            padding: 50px;
+            border: 1px solid white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #000;
+        }
+
+        .menu{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f3f3f3;
+            margin-bottom: 20px;
+            line-height: 50px;
+            padding: 0px 40px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .menu h2{
+            font-size: 16px;
+            margin-right: 20px;
+        }
+
+        .menu-count-container{
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-add-btn{
+            height:30px;
+            width: 30px;
+            background-color: black;
+            color:white;
+            text-align: right;
+            line-height: 30px;
+            border:0;
+            font-size: 18px;
+            padding-right: 10px;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: 0px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .menu-remove-btn{
+            height:30px;
+            width: 30px;
+            background-color: black;
+            color:white;
+            line-height: 30px; 
+            border:0;
+            font-size: 18px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 15px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .menu-count{
+            height:30px;
+            width: 24px;
+            background-color: black;
+            color:white;
+            line-height: 30px;
+            font-size: 18px;
+            text-align: center; 
+        }
+
+        .total{
+            font-size: 20px;
+            margin-top: 40px;
+            margin-left: 350px;
+        }
+
+        .discount{
+            width: 50px;
+            height: 30px;
+            position: absolute;
+            right: -5px;
+            top: -3px;
+            transform: rotate(25deg);
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="app"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+
+        let discountImg = {
+            template: `
+                <div>
+                    <slot name="slotImg"></slot>
+                </div>
+            `
+        }
+
+        let proItem = {
+            template: `
+                <div class="menu">
+                    <h2>{{ item.name }}</h2>
+                        
+                    <div class="menu-count-container">
+                        <h2>￥: {{ item.price }}</h2>
+                        <button class="menu-remove-btn" @click="subCount(item)">
+                            -
+                        </button>
+                        <div class="menu-count">
+                            {{ item.count }}
+                        </div>
+                        <button class="menu-add-btn" @click="addCount(item)">
+                            +
+                        </button>
+
+                        <div slot="slotImg">
+                            <img class="discount" v-if="item.discount" src="./zk.png" slt="" />
+                        </div>
+                    
+                    </div>
+
+                </div>
+            `,
+            props: {
+                item: {
+                    type: Object
+                },
+                index: {
+                    type: Number
+                }  
+            },
+            methods: {
+                addCount(){
+                    this.$emit('add', {
+                        ind: this.index
+                    })
+                },
+                subCount(){
+                    this.$emit('sub', {
+                        ind: this.index
+                    })
+                }
+            }
+        }
+
+        let father = {
+            template: `
+                <div class="container">
+                    <div v-for="(obj, index) in list">
+                        <pro-item :item="obj" :index="index" @add="addFun" @sub="subFun" ></pro-item>
+                    </div>
+
+                    <div class="total">
+                        总价格: {{ total }}
+                    </div>
+                    
+                </div>
+
+            `,
+            components: {
+                'pro-item': proItem
+            },
+            data(){
+                return{
+                    list: [
+                        {name: '香蕉', price: 10, count: 1, discount: true},
+                        {name: '苹果', price: 20, count: 1, discount: false},
+                        {name: '榴莲', price: 30, count: 1, discount: true},
+                        {name: '葡萄', price: 50, count: 1, discount: false}
+                    ],
+                }
+                
+            },
+            computed:{
+                total:function(){
+                    var totalPrice=0;
+                    this.list.forEach(function (item,index) {
+                        totalPrice += item.count * item.price;
+                    });
+                    return totalPrice;
+                }
+            },
+            methods: {
+                addFun(data){
+                    let info = this.list[data.ind]
+                    if(info.count < 4){
+                        info.count += 1
+                    }else {
+                        alert("商品数量最多不超过4个")
+                    }
+                    
+                },
+                subFun(data){
+                    let info = this.list[data.ind]
+                    if(info.count > 1){
+                        info.count -= 1
+                    }else{
+                        alert("商品数量最少不少于1个")
+                    }
+                }
+            }
+        }
+
+        new Vue({
+            render: h => h(father)           
+        }).$mount('#app')
+
+    </script>
+
+</body>
+</html>
