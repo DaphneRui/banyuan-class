@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header></Header>
+
     <div class="home-container">
       <div v-for="item in list">
         <Center :url="item.url" :title="item.title" :text="item.text"></Center>
@@ -58,11 +59,11 @@ export default {
 
 <style>
 .home-container {
-  padding-top: 100px;
+  padding-top: 180px;
   width: 920px;
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;justify-content: space-between;
-
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 </style>

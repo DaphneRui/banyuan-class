@@ -36,12 +36,18 @@ export default {
 
 <style>
 .header-container {
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  width: 1220px;
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 120px;
   box-shadow: 0 3px 10px #efefef;
+  overflow: hidden;
+  z-index: 99;
 }
 .ul {
   display: flex;

@@ -19,7 +19,7 @@ export default {
   padding: 0;
   margin: 0;
 }
-.whole{
+.whole {
   margin: 0 auto;
   width: 1440px;
 }
