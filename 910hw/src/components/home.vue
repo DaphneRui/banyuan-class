@@ -3,7 +3,7 @@
     <Header></Header>
 
     <div class="home-container">
-      <div v-for="item in list">
+      <div v-for="(item, index) in list" :key="'l' + index">
         <Center :url="item.url" :title="item.title" :text="item.text"></Center>
       </div>
     </div>
