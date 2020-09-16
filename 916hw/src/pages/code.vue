@@ -11,7 +11,6 @@
 </template>
 
 <script>
-// import Describe from "./describe"
 export default {
     name: 'slide',
     data(){
@@ -28,7 +27,9 @@ export default {
                 {
                     "id": 761,
                     "coverUrl": "http://by-courses.oss-cn-hangzhou.aliyuncs.com/%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/%E5%B0%81%E9%9D%A2/StickyNotes.jpg",
-                    "summary": "在这个任务中，我们通过构建一个便签页面，来了解CSS的相关内容。我们通过CSS将页面的显示变得更美观。", "courseId": 100025, "title": "构建一个便签页面",
+                    "summary": "在这个任务中，我们通过构建一个便签页面，来了解CSS的相关内容。我们通过CSS将页面的显示变得更美观。",
+                    "courseId": 100025, 
+                    "title": "构建一个便签页面",
                     "type": "code"
                 },
                 {
@@ -75,16 +76,6 @@ export default {
                 },
             ]
         }
-    },
-    methods: {
-        // jump(){
-        //     this.$router.push({
-        //         path: '/describe'
-        //     })
-        // },
-    },
-    components: {
-        // Describe
     }
 }
 </script>

@@ -51,6 +51,13 @@ export default {
                     "title": "Git",
                     "type": "lesson"
                 },
+                {
+                    "id": 876,
+                    "coverUrl": "http://by-camp.oss-cn-shanghai.aliyuncs.com/wiki/Javase-online/images/COURSE_next.jpg",
+                    "summary": "当你学习了准备系列课程之后，说明已经做好了编程的准备，这里对准备课程的学习目标进行一些量化和检测，来帮助你判断是否可以开始编程基础的训练。",
+                    "title": "下一阶段",
+                    "type": "lesson"
+                },
 
             ]
         }
