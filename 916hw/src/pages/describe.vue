@@ -1,27 +1,27 @@
 <template>
     <div class="des-container">
-        <div class="des-left">
+        <div :class="['des-left',showSlide ? '': 'hidden-left']">
             <div class="left-back">
-                <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/catalog/back.png" alt="">
+                <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/catalog/back.png" alt=""  @click="goBack">
                 <span>编程入门</span>
             </div>
-            <div class="left-about">
+            <div class="left-about" @click="showw('title')">
                 课程介绍
             </div>
-            <div class="left-container">
+            <div class="left-container" @click="showw('summary')">
                 课程内容
                 <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/catalog/arrow_down.png" alt="">
             </div>
         </div>
-        <div class="des-right">
+        <div :class="['des-right', showSlide ? '': 'left-change']">
             <div class="right-header">
-                <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/catalog/more.png" alt="">
-                <span>开始编写HTML页面</span>
+                <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/catalog/more.png" alt="" @click="showSlide = !showSlide">
+                <!-- <span>开始编写HTML页面</span> -->
             </div>
             <div class="right-container">
-                <h3>什么是HTML</h3>
-                <img src="http://by-courses.oss-cn-hangzhou.aliyuncs.com/%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8/FirstHtml/image/whatishtml.png" alt="">
-                <p>HTML为超文本(Hyper Text)标记(Markup)语言，html编写的代码是给浏览器看的。浏览器加载html，读取其中的内容，进行解析，最后将内容展现在浏览器页面上。</p>
+                <h3 v-if="showTab === 'title'">{{ info.title }}</h3>
+                <p v-else>{{ info.summary }}</p>
+                
             </div>
         </div>
     </div>
@@ -30,12 +30,33 @@
 <script>
 export default {
     name: 'describe',
+    data(){
+        return{
+            showTab: 'title',
+            info: {},
+            showSlide: true
+        }
+    },
+    created(){
+        const query = this.$route.query
+        const data = JSON.parse(query.data)
+        this.info = data
+    },
+    methods: {
+        goBack(){
+            this.$router.go(-1)
+        },
+        showw(name){
+            this.showTab = name
+        }
+    },
+
 }
 </script>
 
 <style lang="scss">
 .des-container{
-    width: 1440px;
+    width: 1420px;
     display: flex;
     .des-left{
         width: 300px;
@@ -43,6 +64,7 @@ export default {
         display: flex;
         flex-direction: column;
         background-color: #334154;
+        overflow: hidden;
         .left-back{
             width: 280px;
             height: 56px;
@@ -90,10 +112,13 @@ export default {
             }
         }
     }
+    .hidden-left{
+        display: none;
+    }
     .des-right{
         width: 100%;
         .right-header{
-            width: 1120px;
+            width: 100%;
             height: 56px;
             background: #263445;
             padding-left: 20px;
@@ -113,6 +138,7 @@ export default {
             }
         }
         .right-container{
+            width: calc(100% - 260px);
             height: 648px;
             padding: 66px 120px 0;
             border: 20px solid #263445;
@@ -121,11 +147,10 @@ export default {
                 margin-bottom: 16px;
                 font-weight: 700;
             }
-            img{
-                width: 100%;
-                margin-bottom: 16px;
-            }
         }
+    }
+    .left-change{
+        width: 1420px;
     }
 }    
 </style>

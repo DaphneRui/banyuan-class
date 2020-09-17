@@ -2,7 +2,7 @@
     <div class="center-container">
         <div v-for="(item, index) in list" :key="'i' + index">
             <div class="card-title">
-                <router-link to="/describe"><img :src="item.coverUrl"/></router-link>
+                <!-- <router-link to="/describe"><img :src="item.coverUrl"/></router-link> -->
                 <div class="title">{{ item.title }}</div>
             </div>
             <div class="card-text">{{ item.summary }}</div>
