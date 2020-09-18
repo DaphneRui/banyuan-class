@@ -7,18 +7,18 @@
             <p :style="{fontSize: '12px',marginTop: '5px'}">付费会员</p>
 
             <router-link to="/lesson" :style="{marginTop: '90px'}" >
-                <div class="icon" :style="{backgroundColor: $route.name == 'lesson' ? '#3e3f85' : '' }" >
+                <div class="icon" :style="{backgroundColor: routeName == 'lesson' ? '#3e3f85' : '' }" >
                     <i class="fa fa-book" aria-hidden="true"></i>我的课程
                 </div>
             </router-link>
             <router-link to="/mail" >
-                <div class="icon" :style="{backgroundColor: $route.name == 'mail' ? '#3e3f85' : '' }"> 
+                <div class="icon" :style="{backgroundColor: routeName == 'mail' ? '#3e3f85' : '' }"> 
                     <i class="fa fa-envelope-o" aria-hidden="true"></i>邮箱   
                 </div>
             </router-link>
         
             <router-link to="/set" :style="{marginTop: '160px'}">
-                <div class="icon" :style="{backgroundColor: $route.name == 'set' ? '#3e3f85' : '' }">
+                <div class="icon" :style="{backgroundColor: routeName == 'set' ? '#3e3f85' : '' }">
                     <i class="fa fa-cog" aria-hidden="true"></i>设置
                 </div>
             </router-link>
@@ -32,8 +32,8 @@
             <div class="home-left-guide">
                 <i class="fa fa-undo fa-2x" aria-hidden="true" @click="goBack"></i>
                 <p @click="goHome">返回首页</p>
-                <p v-if="$route.name == 'lesson'">我的课程</p>
-                <p v-else-if="$route.name == 'mail'">邮箱</p>
+                <p v-if="routeName == 'lesson'">我的课程</p>
+                <p v-else-if="routeName == 'mail'">邮箱</p>
                 <p v-else>设置</p>
             </div>
             <router-view></router-view>
@@ -60,6 +60,12 @@ export default {
             name:'home'
         })
     }
+  },
+  //计算属性值变化
+  computed: {
+      routeName(){
+        return this.$route.name
+      }
   }
 };
 </script>
