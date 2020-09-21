@@ -39,10 +39,6 @@ export default {
   name: "Home",
   data() {
     return{
-      // name: '',
-      // age: '',
-      // gender: '',
-      // school: '' 
       name: this.$store.state.login.list.name,
       age: this.$store.state.login.list.age,
       gender: this.$store.state.login.list.gender,
