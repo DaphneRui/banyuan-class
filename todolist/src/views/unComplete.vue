@@ -1,12 +1,11 @@
 <template>
   <div class="uncomplete">
    <div class="list-item" @mouseover="over(index)" @mouseout="out(index)" :style="{background:indexNow === index  ? '#e3e3e3':''}">
-       <input type="checkbox"  @click="checkList(item.isComplete)"/>
+       <input type="checkbox" v-model="item.isComplete"  @click="checkList()"/>
        <p :class="['text',isComplete === true ? 'textCheck': '']">{{item.todo}}</p>
        <div>
         <p v-show="isShow" @click="remove()">x</p>
        </div>
-
    </div>
    
   </div>
@@ -38,11 +37,12 @@ export default {
         this.$emit('remove', params)
 
     },
-    checkList(isComplete){
-        this.isComplete = true
-        isComplete = true
-        return this.doList.push()
-        console.log(doList)
+    checkList(){
+        this.item.isComplete = ! this.item.isComplete 
+        // this.isComplete = true
+        // isComplete = true
+        // return this.doList.push()
+        // console.log(doList)
     },
     over(index){
         this.indexNow = index

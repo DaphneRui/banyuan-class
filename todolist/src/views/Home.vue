@@ -1,173 +1,262 @@
 <template>
   <div class="home">
-    <div class="header">
-      <div class="theme">
-          <p>任务列表</p>
-      </div>  
-      <div class="addlist">
-          <p>添加任务:</p> 
-          <input type="text" v-model="inputValue" placeholder="输入任务名称,点回车即可添加任务" @keyup.enter="addlist">
+    <div class="page-top">
+      <div class="page-content">
+        <h2>任务列表</h2>
       </div>
     </div>
 
-    <div class="container">
-      <div class="aside">
-        <div :class="['title', activeComp == 'UnComplete' ? 'on': '']" @click="change('UnComplete')" >
-          <p>未完成任务(0)</p>
+    <div class="main">
+      <div class="add-task">
+        <h3 class="big-title">添加任务：</h3>
+        <input v-model="todo" placeholder="输入任务，点回车即可添加任务" class="task-input" type="text" @keyup.enter="addTodo" />
+      </div>
+
+      <div class="task-main">
+        <ul class="task-nav">
+          <li v-for="(obj, ind) in nav" :key="'nav'+ind" :class="[chooseNav===ind?'chosStyle':'notChosStyle']" @click="changeNav(ind)">
+            <span>{{ obj.title }}</span>
+            <span v-if="ind==0">（{{ notFinishCount }}）</span>
+            <span v-else-if="ind==1">（{{ finishCount }}）</span>
+            <span v-else>（{{ list.length }}）</span>
+          </li>
+          <!-- <li class="chosStyle">
+            <span>未完成（10）</span>
+          </li>
+          <li class="notChosStyle">
+            <span>已完成（10）</span>
+          </li>
+          <li class="notChosStyle">
+            <span>全部（10）</span>
+          </li> -->
+        </ul>
+
+        <div class="task-list">
+          <div class="tasks">
+            <!-- <span class="no-task-tip">还没有添加任何任务哦！！</span> -->
+            <template v-for="(item, index) in showList">
+              <todo-item :key="'todo'+index" :item="item" :index="index" @emitRemove="fatherRemove"></todo-item>
+            </template>
+            
+          </div>
         </div>
-        <div :class="['title', activeComp == 'Complete' ? 'on': '']"  @click="change('Complete')" > 
-          <p>已完成任务({{countY}})</p>   
-        </div>
-        <div :class="['title', activeComp == 'AllList' ? 'on': '']" @click="change('AllList')" >
-          <p>全部任务({{this.list.length}})</p>
-        </div>
-    </div> 
-      
-    <div class="list">
-      <div v-for="(item, index) in list" :key="'pro'+index" >
-        <component :is="activeComp" :item="item" :index="index" @remove="fatherRemove"></component>
       </div>
     </div>
-
-  </div> 
-    
-    
   </div>
 </template>
 
 <script>
-import UnComplete from "../views/unComplete"
-import Complete from "../views/complete"
-import AllList from "../views/allList"
-
+import todoItem from "../components/todoItem.vue"
 export default {
-  name: "Home",
-  components: {
-    UnComplete,
-    Complete,
-    AllList
-  },
-  data(){
-      return{
-        activeComp: 'UnComplete',
-        inputValue: '',
-        list:[],
-        countY: 0
-        // isComplete: false
-      }
-  },
-  computed:{
-    // unComplete(){
-    //   return this.list.filter(item=>{
-    //     return item.isComplete == false
-    //   }).length
-    // },
-    
-  },
-  methods: {
-    change(name){
-      this.activeComp = name
-    },
-    addlist(){
-      this.list.push({
-        todo: this.inputValue,
-        isComplete: false
-      
-      })
-      this.inputValue = ''
-    },
-    fatherRemove(item){
-      var index = this.list.indexOf(item);
-      this.list.splice(index,1)
-    },
-    // count(){
-    //   if(!isComplete){
-    //     countY++
-    //   }
-    // }
+  name: "Work",
+  components: { todoItem },
+  data() {
+    return {
+      nav: [
+        { title: "未完成任务", mark: "not" },
+        { title: "已完成任务", mark: "finish" },
+        { title: "全部任务", mark: "all" }
+      ],
+      chooseNav: 0, // 选择的nav下标，默认是第一个0
+      list: [
+        { title: '11111111', isFinish: false },
+        { title: '222222', isFinish: true },
+        { title: '333333', isFinish: false },
+        { title: '444444', isFinish: true },
+        { title: '5555555', isFinish: false },
+      ], // 任务列表
+      todo: "" // 输入的任务名
+    };
   },
   computed: {
-    
+    showList () {
+      let arr = [];
+      switch (this.chooseNav) {
+        case 0:
+          arr = this.list.filter(item => {
+            return !item.isFinish
+          })
+          break;
+        case 1:
+          arr = this.list.filter(item => {
+            return item.isFinish
+          })
+          break;
+        case 2:
+          arr = this.list;
+      }
+      return arr
+    },
+    notFinishCount () {
+      const notList = this.list.filter(item => {
+        return !item.isFinish
+      })
+      return notList.length
+    },
+    finishCount () {
+      const List = this.list.filter(item => {
+        return item.isFinish
+      })
+      return List.length
+    }
   },
+  methods: {
+    addTodo() {
+      if(!this.todo) return
+      this.list.push({
+        title: this.todo,
+        isFinish: false
+      })
+      this.todo = "";
+    },
+    changeNav(ind) {
+      this.chooseNav = ind;
+    },
+    fatherRemove (data) {
+      let index = this.list.indexOf(data.item);
+      console.log('delete item ', index)
+      this.list.splice(index, 1);
+    }
+  }
 };
 </script>
 
-<style lang="scss">
-.home{
-  margin: 20px auto;
-  box-shadow: 0px 3px 10px black;
-  border-radius: 10px;
-  width: 1120px;
-  height: 750px;
-  overflow: hidden;
-  position: relative;
-  .header{
-    .theme{
-        background-color: cornflowerblue;
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        p{
-            color: white;
-            font-size: 24px;
-            font-weight: 700;
-        }
-    }
-    .addlist{
-        height: 160px;
-        display: flex;
-        padding: 0 100px;
-        align-items: center;
-        background-color: #eeeeee;
-        p{
-          font-size: 18px;
-          font-weight: 500;
-          margin-right: 24px;
-        }
-        input{
-            width: 795px;
-            outline: none;
-            padding: 5px 10px;
-            font-size: 18px; 
-        }
-    }  
+<style scope lang="scss">
+body {
+  margin: 0;
+  background-color: #fafafa;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
-  }
-  .container{
-    padding: 0 100px;
-    background-color: #eeeeee;
-    display: flex;
-    .aside{
-      width: 220px;
-      height: 600px;
-      .title{
-        cursor: pointer;
-        text-align: center;
-        font-size: 24px;
-        color: cornflowerblue;
-        width: 200px;
-        height: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 5px;
-        background-color: #fff;
-        margin-bottom: 20px;
+.home {
+  width: 80%;
+  height: 620px;
+  margin: 30px auto 0;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #c1c1c1;
+  overflow: hidden;
+
+  .page-top {
+    width: 100%;
+    height: 40px;
+    background-color: #3f9cdb;
+
+    .page-content {
+      width: 50%;
+      margin: 0 auto;
+
+      h2 {
+        margin: 0;
+        line-height: 40px;
+        font-size: 18px;
+        color: #fff;
       }
-      .on{
-        color: white;
-        background-color: cornflowerblue;
-      }
-      
-      
     }
-    .list{
-      width: 700px;
-      height: 500px;
-      background-color: #fff;
-      border-radius: 5px;
-      border: 5px solid #e3e3e3;
+  }
+
+  .main {
+    width: 90%;
+    margin: 0 auto;
+    box-sizing: border-box;
+
+    .add-task {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .big-title {
+      min-width: 100px;
+      color: #222;
+    }
+
+    .task-input {
+      width: 99%;
+      height: 30px;
+      outline: 0;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+    }
+
+    .task-main {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .task-nav {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        li {
+          width: 150px;
+          margin: 0 0 30px 0;
+          border-radius: 3px;
+          height: 40px;
+          line-height: 40px;
+          font-weight: bold;
+          font-size: 14px;
+          text-align: center;
+          cursor: pointer;
+
+          span {
+            font-size: 12px;
+          }
+        }
+
+        // nav 被选中的样式
+        .chosStyle {
+          color: #ffffff;
+          background-color: #3f9cdb;
+        }
+
+        // nav 未选中的样式
+        .notChosStyle {
+          color: #3f9cdb;
+          background-color: #ffffff;
+        }
+      }
+
+      .task-list {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        background: #f3f3f3;
+        padding: 10px;
+        border-radius: 10px;
+        margin-left: 20px;
+        height: 400px;
+        overflow-y: scroll;
+
+        li {
+          position: relative;
+          font-size: 16px;
+          border-bottom: 1px solid #ededed;
+
+          &:hover {
+            background-color: orange;
+          }
+        }
+
+        .tasks {
+          width: 100%;
+          height: 400px;
+          background-color: #fff;
+          overflow-y: scroll;
+
+        }
+      }
+
+      .no-task-tip {
+        padding: 100px 0 10px 10px;
+        display: block;
+        // border-bottom: 1px solid #ededed;
+        color: #777;
+        text-align: center;
+      }
     }
   }
 }
