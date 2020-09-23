@@ -43,7 +43,7 @@ export default {
           school: this.school
         }
 
-        // 提交mutation
+        // 提交action
         this.updateUser(data)
 
         // 跳转
