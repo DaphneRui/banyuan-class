@@ -1,2 +1,3 @@
-/** 更新了list */
-export const UPDATE_List = 'updateList';
+export const ADD_COUNT = 'addCount';
+export const REMOVE_COUNT = 'removeCount';
+

@@ -11,20 +11,20 @@ const menu = {
     ],
   },
   mutations: {
-    removeCount(state){
-        state.list.count--;
-        if(state.list.count < 1){
-            state.list.count = 1
-            alert("商品数量最少不少于1个")
-        }
-    },
-    addCount(state){
-        state.list.count++;
-        if(state.list.count > 4){
-            state.list.count = 4
-            alert("商品数量最多不超过4个")
-        }
-    }
+    // removeCount(state){
+    //     state.list.count--;
+    //     if(state.list.count < 1){
+    //         state.list.count = 1
+    //         alert("商品数量最少不少于1个")
+    //     }
+    // },
+    // addCount(state){
+    //     state.list.count++;
+    //     if(state.list.count > 4){
+    //         state.list.count = 4
+    //         alert("商品数量最多不超过4个")
+    //     }
+    // }
   },
   actions: {
     // updateAdd({ commit }) {
