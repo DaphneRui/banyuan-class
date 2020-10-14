@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+    <title>Document</title>
+
+    <style>
+
+    .header-container {
+        background-color: #fff;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 120px;
+        box-shadow: 0 3px 10px #efefef;
+        overflow: hidden;
+        z-index: 99;
+    }
+    .ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .ul li {
+        list-style: none;
+        margin-right: 50px;
+    }
+    .login {
+        margin: 0 50px;
+    }
+
+    .footer-container {
+        background-color: #303232;
+        display: flex;
+        padding: 64px 120px 85px 120px;
+        overflow: hidden;
+        position: absolute;
+        /* bottom: 0; */
+        left: 0;
+        right: 0;
+    }
+    .about-us {
+        display: flex;
+        flex-direction: column;
+        margin-right: 120px;
+        width: 155px;
+    }
+    .about-us h2 {
+        font-size: 22px;
+        line-height: 30px;
+        color: #e3e3e3;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    .about-us h3 {
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 24px;
+        color: #e3e3e3;
+        font-weight: 400;
+        margin-top: 40px;
+    }
+    .text {
+        font-size: 12px;
+        color: #e3e3e3;
+        font-weight: 400;
+        line-height: 24px;
+        margin-top: 40px;
+    }
+    .icon1 {
+        width: 16px;
+        height: 16px;
+        margin-right: 12px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    .icon2 {
+        margin-top: 20px;
+        margin-right: 15px;
+        width: 24px;
+        height: 24px;
+    }
+    .address {
+        margin-top: 10px;
+        display: flex;
+    }
+
+    .home-container {
+        padding-top: 180px;
+        width: 920px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .center-container {
+        width: 400px;
+        height: 450px;
+    }
+    .card-title {
+        width: 400px;
+        background: #fff;
+        border: 1px solid #eaeaea;
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+        cursor: pointer;
+    }
+    .center-container img {
+        width: 400px;
+        height: 198px;
+    }
+    .title {
+        width: 100%;
+        height: 68px;
+        padding-left: 10px;
+        line-height: 68px;
+        font-family: PingFangSC-Medium;
+        font-size: 18px;
+        color: #000;
+        letter-spacing: 1.08px;
+    }
+    .card-text {
+        width: 400px;
+        font-size: 14px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: #505050;
+        line-height: 20px;
+        padding: 12px 0;
+    }
+    .time {
+        width: 400px;
+        font-size: 14px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: #505050;
+        line-height: 20px;
+        padding-top: 12px;
+    }
+
+
+    </style>
+</head>
+<body>
+    
+    <div id="example"></div>
+
+    <script type="text/babel">
+
+        const list = [
+            { cover: 'http://by-camp.oss-cn-shanghai.aliyuncs.com/wiki/Javase-online/images/PRE_MACBOOK.png', title:'操作系统使用技巧', decp:'学习编程过程中，我们将花费大量时间使用计算机，使用其中的工具完成我们的工作。这些工具的运行都是依靠操作系统，这里我们来介绍一下如何高效的使用操作系统以及工具。' },
+            { cover: 'http://by-camp.oss-cn-shanghai.aliyuncs.com/wiki/Javase-online/images/PRE_markdown.png', title:'操作系统使用技巧', decp:'学习编程过程中，我们将花费大量时间使用计算机，使用其中的工具完成我们的工作。这些工具的运行都是依靠操作系统，这里我们来介绍一下如何高效的使用操作系统以及工具。' },
+            { cover: 'http://by-camp.oss-cn-shanghai.aliyuncs.com/wiki/Javase-online/images/PRE_terminal.jpg', title:'操作系统使用技巧', decp:'学习编程过程中，我们将花费大量时间使用计算机，使用其中的工具完成我们的工作。这些工具的运行都是依靠操作系统，这里我们来介绍一下如何高效的使用操作系统以及工具。' },
+            { cover: 'http://by-camp.oss-cn-shanghai.aliyuncs.com/online/frontcover/PRE_code.png', title:'操作系统使用技巧', decp:'学习编程过程中，我们将花费大量时间使用计算机，使用其中的工具完成我们的工作。这些工具的运行都是依靠操作系统，这里我们来介绍一下如何高效的使用操作系统以及工具。' },
+        ]
+
+        class App extends React.Component{
+
+            constructor(){
+                super();
+                
+            }
+
+            renderCards(){
+
+                return list.map((item)=>{
+
+                    return (
+
+                        <Center item={item} key={ uuidv4() }/>
+                    )
+                })
+            }
+
+            render(){
+
+                return (
+
+                    <div>
+                        <Header />
+                        
+                        <div className="home-container">{ this.renderCards() }</div>
+
+                        <Footer/>
+                    </div>
+                )
+            }
+        }
+
+        class Center extends React.Component{
+
+            constructor(){
+                super()
+                this.state = {
+                    time: 1599738102436
+                }
+            }
+
+            render(){  
+
+                return (
+
+                    <div className="center-container">
+                        <div className="card-title">
+                        <img src={ this.props.item.cover } />
+                        <div className="title">{ this.props.item.title }</div>
+                        </div>
+                        <div className="time">
+                        <span style={{ marginRight: '5px' }}>创建时间: { moment(this.state.time).format('YYYY-MM-DD') }</span>
+                        </div>
+                        <div className="card-text">{ this.props.item.decp }</div>
+                    </div>
+
+                )
+            }
+        }
+
+        class Header extends React.Component{
+
+            constructor(){
+                super();
+            }
+            render(){
+
+                return (
+
+                    <div className="header-container">
+                        <div>
+                        <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/commonbg/logo.png" style={{ width: '200px' }}/>
+                        </div>
+
+                        <ul className="ul">
+                        <li>首页</li>
+                        <li>职前集训</li>
+                        <li>
+                            高校俱乐部
+                            <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/commonbg/ic_arrow_down.svg" style={{ marginLeft: '5px' }}/>
+                        </li>
+                        <li className="login">登录 | 注册</li>
+                        </ul>
+                    </div>
+                )
+            }
+        }
+
+        class Footer extends React.Component{
+
+            constructor(){
+                super();
+                this.state = {
+                    
+                }
+            }
+            render(){
+
+                return (
+
+                    <div className="footer-container">
+                        <div className="about-us" style={{ width: '290px', marginRight: '180px' }}>
+                        <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/commonbg/logo-footer.png" style={{ width: '146px' }} />
+                        <span className="text"
+                            >© 2020 半圆（南京）网络有限公司 版权所有<br />
+                            苏 ICP备 18056744-1<br />
+                            营业执照 ICP许可证</span
+                        >
+                        </div>
+
+                        <div className="about-us">
+                        <h2>我们的故事</h2>
+                        <h3>半圆的发展历程和背景,更清晰的了解我们</h3>
+                        </div>
+
+                        <div className="about-us">
+                        <h2>成为一员</h2>
+                        <h3>半圆学社致力于数字领域的不断开拓,欢迎志同道合的朋友加入我们。</h3>
+                        </div>
+
+                        <div className="about-us" style={{ width: '220px', marginRight: '0px' }}>
+                        <h2>和我们交流</h2>
+                        <h3>
+                            <div>
+                            <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/commonbg/phone.svg" className="icon1" />
+                            025-58703536
+                            </div>
+                            <div className="address">
+                            <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/commonbg/map.svg" className="icon1" />
+                            <span>南京市仙林紫东国际创意园B9栋</span>
+                            </div>
+                            <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/commonbg/weixin.png" className="icon2" />
+                            <img src="https://by-image.oss-cn-shanghai.aliyuncs.com/yfront/static/commonbg/weibo.png" className="icon2" />
+                        </h3>
+                        </div>
+                    </div>
+
+                )
+            }
+            }
+
+
+
+        ReactDOM.render(
+            <App/>,
+            document.getElementById('example')
+        );
+    </script>
+</body>
+</html>
