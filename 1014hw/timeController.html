@@ -141,7 +141,6 @@
                 }  
     
                 componentWillReceiveProps (nextProps) {
-                    console.log('新版',nextProps.state)
                     if( nextProps.state.flag1 !== this.props.state.flag1 ){
                         this.setState({
                             step: Number(nextProps.state.step1),
@@ -154,9 +153,7 @@
                             
                             
                         })
-                        
-                        // this.timerStop()
-                        // this.timerStart(nextProps.state.step1,nextProps.state.time1)
+
                     }
                 }
 
@@ -240,9 +237,13 @@
                     this.setState({
                         step:Number(nextProps.state.step2),
                         time:Number(nextProps.state.time2),
+                    },()=>{
+                        this.timerStop()
+                        if(this.state.msg == 'stop'){
+                            this.timerStart(nextProps.state.step2,nextProps.state.time2)
+                        }
+                        
                     })
-                    this.timerStop()
-                    this.timerStart(nextProps.state.step2,nextProps.state.time2)
                 }
             }
 
@@ -258,7 +259,7 @@
                 return  (   
                     <div>
                             <div>
-                                <div> 定时器1: { this.state.count } </div>
+                                <div> 定时器2: { this.state.count } </div>
                                 <button onClick={ this.timeController }>{ this.state.msg }</button>
                             </div>
                             
